@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  name      String
+  role      String     @default("USER")
+  playlists Playlist[]
+
+  @@map("users")
+}
+
+model Artist {
+  id       Int     @id @default(autoincrement())
+  name     String
+  bio      String?
+  photoUrl String?
+  albums   Album[]
+
+  @@map("artists")
+}
+
+model Album {
+  id          Int             @id @default(autoincrement())
+  title       String
+  description String?
+  releaseDate DateTime
+  coverUrl    String?
+  artistId    Int
+  artist      Artist          @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  playlists   PlaylistAlbum[]
+
+  @@map("albums")
+}
+
+model Playlist {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String?
+  userId      Int
+  albums      PlaylistAlbum[]
+  user        User            @relation(fields: [userId], references: [id])
+
+  @@map("playlists")
+}
+
+model PlaylistAlbum {
+  playlistId Int
+  albumId    Int
+  album      Album    @relation(fields: [albumId], references: [id])
+  playlist   Playlist @relation(fields: [playlistId], references: [id])
+
+  @@id([playlistId, albumId])
+  @@map("playlist_albums")
+}

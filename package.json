@@ -1,0 +1,30 @@
+{
+  "name": "evaluation-nodejs",
+  "version": "1.0.0",
+  "description": "Evaluation pour la formation Concepteur Développeur d'Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lheinrich68/evaluation-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lheinrich68/evaluation-nodejs/issues"
+  },
+  "homepage": "https://github.com/lheinrich68/evaluation-nodejs#readme",
+  "dependencies": {
+    "@prisma/client": "^6.19.2",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.0.2",
+    "prisma": "^6.19.2"
+  }
+}
